@@ -31,3 +31,36 @@ A locadora oferecerá uma lista de taxas e serviços que os clientes poderão ad
 Será possível registrar a devolução dos veículos, aplicando multas em caso de atraso. O sistema também permitirá configurar o preço do combustível para inclusão no cálculo dos aluguéis.
 
 O objetivo é proporcionar uma gestão eficiente e uma experiência positiva tanto para os funcionários quanto para os clientes da locadora.
+
+## Requisitos
+
+- .NET SDK (recomendado .NET 8.0 ou superior) para compilação e execução do projeto.
+
+---
+
+## Como Usar
+
+#### Clone o Repositório
+```
+git clone https://github.com/academia-do-programador/LocadoraAutomoveis.git
+```
+
+#### Navegue até a pasta raiz da solução
+```
+cd ControleLocadoraDeAutomoveis
+```
+
+#### Restaure as dependências
+```
+dotnet restore
+```
+
+#### Navegue até a pasta do projeto
+```
+cd ControleLocadoraDeAutomoveis.WebApp
+```
+
+#### Execute o projeto
+```
+dotnet run
+```
