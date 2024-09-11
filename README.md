@@ -42,7 +42,7 @@ O objetivo é proporcionar uma gestão eficiente e uma experiência positiva tan
 
 #### Clone o Repositório
 ```
-git clone https://github.com/psergioPadilha/LocadoraAutomoveis.git
+git clone https://github.com/psergioPadilha/LocadoraAutomoveis
 ```
 
 #### Navegue até a pasta raiz da solução
