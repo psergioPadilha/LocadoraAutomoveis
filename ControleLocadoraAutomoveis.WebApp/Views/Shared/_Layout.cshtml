@@ -1,0 +1,145 @@
+﻿@{
+	MensagemViewModel? mensagem = ViewBag.Mensagem ?? null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Locadora De Veículos</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+
+            <nav class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 text-bg-light">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
+                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none text-dark">
+                        <span class="fs-4 fw-bold d-none d-sm-inline">Locadora de Veículos</span>
+                    </a>
+
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        @if (User.Identity is not null && User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a href="/" title="Inicio" class="nav-link align-middle px-0  text-decoration-none text-primary">
+                                    <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Início</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/GrupoAutomoveis/Listar" title="Grupos de Veículos" class="nav-link align-middle px-0  text-decoration-none text-primary">
+                                    <i class="fs-4 bi-collection-fill"></i> <span class="ms-1 d-none d-sm-inline">Grupos de Veículos</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/Automovel/Listar" title="Automóveis" class="nav-link align-middle px-0  text-decoration-none text-primary">
+                                    <i class="fs-4 bi-car-front-fill"></i> <span class="ms-1 d-none d-sm-inline">Veículos</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/PlanoDeCobranca/Listar" title="Planos de Cobrança" class="nav-link align-middle px-0  text-decoration-none text-primary">
+                                    <i class="fs-4 bi-currency-exchange"></i> <span class="ms-1 d-none d-sm-inline">Planos de Cobrança</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/Taxa/Listar" title="Taxas" class="nav-link align-middle px-0  text-decoration-none text-primary">
+                                    <i class="fs-4 bi-tags-fill"></i> <span class="ms-1 d-none d-sm-inline">Taxas</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/Combustivel/Configurar" title="Configurações de Combustíveis" class="nav-link align-middle px-0  text-decoration-none text-primary">
+                                    <i class="fs-4 bi-gear-fill"></i> <span class="ms-1 d-none d-sm-inline">Configurações de Combustíveis</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+	                            <a href="/Locacao/Listar" title="Locações" class="nav-link align-middle px-0  text-decoration-none text-primary">
+		                            <i class="fs-4 bi-shop"></i> <span class="ms-1 d-none d-sm-inline">Locações</span>
+	                            </a>
+                            </li>
+
+                            <li class="nav-item">
+	                            <a href="/Cliente/Listar" title="Clientes" class="nav-link align-middle px-0  text-decoration-none text-primary">
+		                            <i class="fs-4 bi-shop"></i> <span class="ms-1 d-none d-sm-inline">Clientes</span>
+	                            </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/Condutor/Listar" title="Condutores" class="nav-link align-middle px-0  text-decoration-none text-primary">
+                                    <i class="fs-4 bi-shop"></i> <span class="ms-1 d-none d-sm-inline">Condutores</span>
+                                </a>
+                            </li>
+
+                            @if (User.IsInRole("Empresa"))
+                            {
+                                <li class="nav-item">
+                                    <a href="/Funcionario/Listar" title="Funcionários" class="nav-link align-middle px-0  text-decoration-none text-primary">
+                                        <i class="fs-4 bi-people-fill"></i> <span class="ms-1 d-none d-sm-inline">Funcionários</span>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a href="/Autenticacao/Login" title="Login" class="nav-link align-middle px-0  text-decoration-none text-primary">
+                                    <i class="fs-4 bi-person-check-fill"></i> <span class="ms-1 d-none d-sm-inline">Login</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Autenticacao/Registrar" title="Registrar" class="nav-link align-middle px-0  text-decoration-none text-primary">
+                                    <i class="fs-4 bi-person-plus-fill"></i> <span class="ms-1 d-none d-sm-inline">Registro</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+
+                    <hr />
+
+                    @if (User.Identity is not null && User.Identity.IsAuthenticated)
+                    {
+                        <div class="dropdown pb-4">
+                            <a href="/" class="d-flex align-items-center dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="~/img/user.png" alt="Avatar do Usuário" width="30" height="30" class="rounded-circle">
+                                <span class="fs-5 d-none d-sm-inline ms-3 text-dark">@User.Identity?.Name</span>
+                            </a>
+                            <ul class="dropdown-menu text-small shadow">
+                                <li>
+                                    <form asp-controller="Autenticacao" asp-action="Logout">
+                                        <button class="dropdown-item text-dark" type="submit">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </nav>
+            <div class="col py-5">
+                <main role="main" class="container-sm">
+                    <h1 class="fw-semibold">@ViewBag.Title</h1>
+                    <hr>
+                    <partial name="_Mensagem" model="mensagem"></partial>
+
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ListarLocacaoViewModel>
+
+@{
+	ViewBag.Title = "Listagem de Locação";
+}
+
+<div class="col">
+
+    <a class="btn btn-primary px-4 mt-3" asp-controller="Locacao" asp-action="Inserir">
+        <i class="bi bi-circle-add"></i>
+        Inserir Nova Locação
+    </a>
+
+    <div class="row gap-2 my-3 my-xl-5">
+        @foreach (var locacao in Model)
+        {
+            <div class="card col-lg-4 col-xl-3 px-0">
+                <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                    <h5 class="p-0">Locação #@locacao.Id</h5>
+
+                    <div class="text-end d-flex align-items-center gap-3">
+                        @if (!locacao.DataDevolucao.HasValue)
+                        {
+                            <a title="Realizar Devolução"
+                               class="text-info-emphasis fs-5"
+                               href="/Locacao/RealizarDevolucao/@locacao.Id">
+                                <i class="bi bi-coin"></i>
+                            </a>
+                        }
+                        <a title="Detalhes"
+                           class="text-info-emphasis fs-5"
+                           href="/Locacao/Detalhes/@locacao.Id">
+                            <i class="bi bi-search"></i>
+                        </a>
+                        @if (!locacao.DataDevolucao.HasValue)
+                        {
+                            <a title="Editar"
+                               class="text-info-emphasis fs-5"
+                               href="/Locacao/Editar/@locacao.Id">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                        }
+                        @if (locacao.DataDevolucao.HasValue)
+                        {
+                            <a title="Excluir"
+                               class="text-info-emphasis fs-5" href="/Locacao/Excluir/@locacao.Id">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
+                        }
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">Veículo: @locacao.Veiculo</h5>
+                    <p class="card-text">
+                        Condutor: @locacao.Condutor <br />
+                        Tipo de Plano: @locacao.TipoPlano <br />
+
+                        <hr>
+
+                        Devolução: @(locacao.DataDevolucao.HasValue ? "Completa" : "Pendente")<br />
+                        Data da Locação: @locacao.DataLocacao.ToShortDateString()<br />
+                        Data Prevista de Devolução: @locacao.DevolucaoPrevista.ToShortDateString()<br />
+
+                        @if (locacao.DataDevolucao.HasValue)
+                        {
+                            <span>Data de Devolução: @locacao.DataDevolucao.Value.ToShortDateString()</span>
+
+                            <br />
+                            <span>Quilometragem Percorrida: @locacao.QuilometragemPercorrida km(s)</span>
+
+                            <br />
+                        }
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

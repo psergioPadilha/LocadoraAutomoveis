@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ListarTaxaViewModel>
+
+@{
+	ViewBag.Title = "Lista de Taxas";
+}
+
+<div class="col">
+	<a clas="btn btn-primary px-4 mt-3" asp-controller="Taxa" asp-action="Inserir">
+		<i class="bi bi-circle-add"></i>
+		Inserir Nova Taxa
+	</a>
+	
+	<div class="row gap-2 my-3 my-xl-5">
+		@foreach (var taxa in Model)
+		{
+			<div class="card col-lg-4 col-xl-3 px-0">
+				<div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+					<h5 class="p-0">@taxa.Id</h5>
+					<div class="text-end d-flex align-items-center gap-3">
+						<a title="Detalhess"
+						   class="text-info-emphasis fs-5"
+						   href="/Taxa/Detalhes/@taxa.Id">
+							<i class="bi bi-search"></i>
+						</a>
+
+						<a title="Editar"
+						   class="text-info-emphasis fs-5"
+						   href="/Taxa/Editar/@taxa.Id">
+							<i class="bi bi-pencil-fill"></i>
+						</a>
+
+						<a title="Excluir"
+						   class="text-info-emphasis fs-5"
+						   href="/Taxa/Excluir/@taxa.Id">
+							<i class="bi bi-trash-fill"></i>
+						</a>
+					</div>
+				</div>
+				
+				<div class="card-body">
+					<h5 class="card-title">@taxa.Descricao</h5>
+					<p class="card-text">
+						Valor: @taxa.Valor.ToString("C") <br/>
+						Tipo de Cobrança: @taxa.TipoCobranca
+					</p>
+				</div>
+			</div>
+		}
+	</div>
+</div>

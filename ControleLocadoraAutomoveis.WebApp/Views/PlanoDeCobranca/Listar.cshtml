@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ListarPlanoDeCobrancaViewModel>
+
+@{
+	ViewBag.Title = "Listagem de Planos de Cobranca";
+}
+
+<div class="col">
+	
+	<a class="btn btn-primary px-4 mt-3" asp-controller="PlanoDeCobranca" asp-action="Inserir">
+		<i clas="bi bi-circle-add"></i>
+		Inserir Novo Plano de Cobrança
+	</a>
+	
+	<div class="row gap-2 my-3 my-xl-5">
+		
+		@foreach (var plano in Model)
+		{
+			<div class="card col-lg-5 col-xl-4 px-0">
+
+				<div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+					<h5 class="p-0">@plano.Id</h5>
+					<div class="text-end d-flex align-items-center gap-3">
+						<a title="Detalhes"
+						   class="text-info-emphasis fs-5"
+						   href="/PlanoDeCobranca/Detalhes/@plano.Id">
+							<i class="bi bi-search"></i>
+						</a>
+
+						<a title="Editar"
+						   class="text-info-emphasis fs-5"
+						   href="/PlanoDeCobranca/Editar/@plano.Id">
+							<i class="bi bi-pencil-fill"></i>
+						</a>
+
+						<a title="Excluir"
+						   class="text-info-emphasis fs-5"
+						   href="/PlanoDeCobranca/Excluir/@plano.Id">
+							<i class="bi bi-trash-fill"></i>
+						</a>
+					</div>
+				</div>
+				
+				<div class="card-body">
+					<h5 class="card-title">Grupo de Veículos: @plano.GrupoAutomoveis</h5>
+					<p class="card-text">
+						Preço Diário (Diário): @plano.PrecoDiarioPlanoDiario.ToString("C2") <br/>
+						Preço por Km (Diário): @plano.PrecoQuilometroPlanoDiario.ToString("C2") <br/>
+						Km Disponíveis (Controlado): @plano.QuilometrosDisponiveisPlanoControlado Km(s) <br/>
+						Preço Diário (Controlado): @plano.PrecoDiarioPlanoControlado.ToString("C2") <br/>
+						Preço por Km Extrapolado (Controlado): @plano.PrecoQuilometroExtrapoladoPlanoControlado.ToString("C2") <br/>
+						Preço Diário (Livre): @plano.PrecoDiarioPlanoLivre.ToString("C2") <br/>
+					</p>
+				</div>
+
+			</div>
+		}
+
+	</div>
+
+</div>
